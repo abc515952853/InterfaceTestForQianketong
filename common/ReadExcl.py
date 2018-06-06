@@ -12,6 +12,7 @@ class Xlrd:
         xls_name = readconfig.get_xls('xls_name')
         self.xlsPath = os.path.join(proDir,'testfile',xls_name)
         self.openfile = xlrd.open_workbook(self.xlsPath,'w',formatting_info= True)
+        self.newfile = copy(self.openfile)
 
     #遍历sheet中的用例
     def get_xls_next(self,sheet_name):
@@ -47,12 +48,9 @@ class Xlrd:
         return no
 
     #重置result_msg、result_code内容
-    def set_cell(self,sheet_name,curRowNo,curColNo_code,curColNo_msg,result_code,result_text,color):
-        self.newfile = copy(self.openfile)
-
+    def set_cell(self,sheet_name,curRowNo,curColNo,value,color):
         newsheet = self.newfile.get_sheet(sheet_name)
-        newsheet.write(curRowNo,curColNo_code,result_code,color)
-        newsheet.write(curRowNo,curColNo_msg,result_text,color)
+        newsheet.write(curRowNo,curColNo,value,color)
 
     #写入excl内容
     def save(self):

@@ -18,7 +18,7 @@ class TestSendCode(unittest.TestCase):
 
     def tearDown(self):
         """
-        :return:s
+        :return:
         """
 
     @ddt.data(*excel.get_xls_next(sheet_name))
@@ -28,7 +28,8 @@ class TestSendCode(unittest.TestCase):
         payload = {"Phone":str(data["phone"]),"CodeType":int(data["type"]),"Domain":'sss'}
         headers = {"Content-Type":"application/json"}
         r = requests.post(url='http://api.qkt.qianjifang.com.cn/api/SMS/Send/Code',data = json.dumps(payload),headers = headers)
-        excel.set_cell(sheet_name,int(data["case_id"]),excel.get_sheet_colname(sheet_name)["result_code"],excel.get_sheet_colname(sheet_name)["result_msg"],r.status_code,r.text,excel.set_color())
+        excel.set_cell(sheet_name,int(data["case_id"]),excel.get_sheet_colname(sheet_name)["result_code"],r.status_code,excel.set_color())
+        excel.set_cell(sheet_name,int(data["case_id"]),excel.get_sheet_colname(sheet_name)["result_msg"],r.text,excel.set_color())
         excel.save()
         if r.status_code==204:
             readconfig.set_member('phone',str(data['phone']))
