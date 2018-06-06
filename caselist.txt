@@ -1,5 +1,5 @@
-TestAccount
+##TestAccount
 TestSendCode
-TestRegister
-TestToken
-TestHome
+##TestRegister
+##TestToken
+##TestHome

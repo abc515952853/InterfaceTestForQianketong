@@ -25,12 +25,12 @@ class TestSendCode(unittest.TestCase):
     def test_Sencode(self, data):
         excel = ReadExcl.Xlrd()
         readconfig=ReadConfig.ReadConfig()
-        payload = {"phone":str(data["phone"]),"type":int(data["type"])}
+        payload = {"Phone":str(data["phone"]),"CodeType":int(data["type"]),"Domain":'sss'}
         headers = {"Content-Type":"application/json"}
-        r = requests.post(url='http://api.hhx.qianjifang.com.cn/api/Account/SendCode',data = json.dumps(payload),headers = headers)
-        excel.set_cell(sheet_name,int(data["case_id"]),excel.get_sheet_colname(sheet_name)["result_code"],excel.get_sheet_colname(sheet_name)["result_msg"],r.status_code,r.text)
+        r = requests.post(url='http://api.qkt.qianjifang.com.cn/api/SMS/Send/Code',data = json.dumps(payload),headers = headers)
+        excel.set_cell(sheet_name,int(data["case_id"]),excel.get_sheet_colname(sheet_name)["result_code"],excel.get_sheet_colname(sheet_name)["result_msg"],r.status_code,r.text,excel.set_color())
         excel.save()
-        # if r.status_code==204:
-        #     readconfig.set_member('phone',str(data['phone']))
-        #     readconfig.save()
+        if r.status_code==204:
+            readconfig.set_member('phone',str(data['phone']))
+            readconfig.save()
         self.assertEqual(data['expected_code'],r.status_code)

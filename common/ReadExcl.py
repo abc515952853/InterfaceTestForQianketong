@@ -11,7 +11,7 @@ class Xlrd:
         readconfig=ReadConfig.ReadConfig()
         xls_name = readconfig.get_xls('xls_name')
         self.xlsPath = os.path.join(proDir,'testfile',xls_name)
-        self.openfile = xlrd.open_workbook(self.xlsPath,'w')
+        self.openfile = xlrd.open_workbook(self.xlsPath,'w',formatting_info= True)
 
     #遍历sheet中的用例
     def get_xls_next(self,sheet_name):
@@ -47,11 +47,12 @@ class Xlrd:
         return no
 
     #重置result_msg、result_code内容
-    def set_cell(self,sheet_name,curRowNo,curColNo_code,curColNo_msg,result_code,result_text):
+    def set_cell(self,sheet_name,curRowNo,curColNo_code,curColNo_msg,result_code,result_text,color):
         self.newfile = copy(self.openfile)
+
         newsheet = self.newfile.get_sheet(sheet_name)
-        newsheet.write(curRowNo,curColNo_code,result_code)
-        newsheet.write(curRowNo,curColNo_msg,result_text)
+        newsheet.write(curRowNo,curColNo_code,result_code,color)
+        newsheet.write(curRowNo,curColNo_msg,result_text,color)
 
     #写入excl内容
     def save(self):
@@ -74,6 +75,16 @@ class Xlrd:
         coldic = self.get_sheet_colname(sheet_name)
         colnum = coldic[col_name]
         return colnum
+    
+    def set_color(self):
+        font0 = xlwt.Font()
+        font0.name = 'Times New Roman'
+        font0.colour_index = 2
+        font0.bold = True
+        style0 = xlwt.XFStyle()
+        style0.font = font0
+        return style0
+        
 
             
         

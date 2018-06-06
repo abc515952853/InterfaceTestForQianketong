@@ -3,7 +3,7 @@ from HTMLTestRunner import HTMLTestRunner
 import datetime
 import os
 import ReadConfig
-from testcase import TestSendCode,TestAccount,TestRegister,TestToken,TestHome
+from testcase import TestSendCode
 
 readconfig = ReadConfig.ReadConfig()
 
