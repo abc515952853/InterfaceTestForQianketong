@@ -31,7 +31,7 @@ class TestSendCode(unittest.TestCase):
         excel.set_cell(sheet_name,int(data["case_id"]),excel.get_sheet_colname(sheet_name)["result_code"],r.status_code,excel.set_color())
         excel.set_cell(sheet_name,int(data["case_id"]),excel.get_sheet_colname(sheet_name)["result_msg"],r.text,excel.set_color())
         excel.save()
-        if r.status_code==204:
+        if r.status_code==204 or 200:
             readconfig.set_member('phone',str(data['phone']))
             readconfig.save()
         self.assertEqual(data['expected_code'],r.status_code)
