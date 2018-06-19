@@ -74,11 +74,18 @@ class Xlrd:
         colnum = coldic[col_name]
         return colnum
     
-    def set_color(self,code):
+    def set_color(self,code=100):
         font0 = xlwt.Font()
         font0.name = 'Times New Roman'
-        font0.colour_index = 2
-        font0.bold = True
+        if code >=500:
+            font0.colour_index = 2
+        elif code >=400:
+            font0.colour_index = 2
+        elif code >=300:
+            font0.colour_index = 1
+        elif code >=200:
+            font0.colour_index = 3
+        # font0.bold = True
         style0 = xlwt.XFStyle()
         style0.font = font0
         return style0
