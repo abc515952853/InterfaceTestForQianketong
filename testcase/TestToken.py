@@ -39,4 +39,4 @@ class TestToken(unittest.TestCase):
             session = r.json()["token_type"]+" "+r.json()["access_token"]
             readconfig.set_member('session',session)
             readconfig.save()
-        self.assertEqual(data['expected_code'],r.status_code)
+        self.assertEqual(data['expected_code'],r.status_code,data["case_describe"])
