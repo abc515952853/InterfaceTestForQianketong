@@ -13,7 +13,7 @@ class Pymssql:
         self.cursor = self.conn.cursor()
         
     def GetSmsDate(self):
-        sql = "SELECT * FROM [dbo].[SmsRecord]"
+        sql = "SELECT * FROM [dbo].[SmsRecord] order by createtime desc"
         self.cursor.execute(sql)
-        print(self.cursor.fetchone()[4])
+        return self.cursor.fetchone()[0]
         

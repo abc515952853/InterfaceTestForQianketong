@@ -1,6 +1,6 @@
 import unittest
 import ddt
-from common import ReadExcl
+from common import ReadExcl,ReadDB
 import ReadConfig 
 import requests
 import  json 
