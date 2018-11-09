@@ -24,9 +24,8 @@ class TestSendCode(unittest.TestCase):
 
     @ddt.data(*excel.get_xls_next(sheet_name))
     def test_Sencode(self, data):
-        excel = ReadExcl.Xlrd()
         readconfig=ReadConfig.ReadConfig()
-        #填写求求参数
+        #填写求求参数h
         url = readconfig.get_url('url')+api
         payload = {"Phone":str(data["phone"]),"CodeType":int(data["type"]),"Domain":'sss'}
         headers = {"Content-Type":"application/json"}

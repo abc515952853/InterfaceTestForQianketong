@@ -26,6 +26,11 @@ class ReadConfig:
     def get_url(self, name):
         value = self.cf.get("URL", name)
         return value
+    
+    #获取DB信息
+    def get_db(self,name):
+        value = self.cf.get("DB",name)
+        return value
 
     #获取TESTCASE信息
     def get_xls(self,name):
