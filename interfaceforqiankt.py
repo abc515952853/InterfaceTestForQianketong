@@ -28,34 +28,34 @@ def test():
     r = requests.get(url=apiurl, params = payload)
     testprint('验证验证码',r.status_code)
 
-    # time.sleep(1)
+    time.sleep(1)
 
-    # #登录
-    # code = '1234'
-    # apiurl = url+'api/Token'
-    # payload = {"grant_type":'phonecode', "phone": phone,"code":code}
-    # r = requests.post(url=apiurl, data = payload)
-    # testprint('登录',r.status_code)
-    # session = r.json()["token_type"]+" "+r.json()["access_token"]
-    # userid = r.json()["id"]
+    #登录
+    code = '1234'
+    apiurl = url+'api/Token'
+    payload = {"grant_type":'phonecode', "phone": phone,"code":code}
+    r = requests.post(url=apiurl, data = payload)
+    testprint('登录',r.status_code)
+    session = r.json()["token_type"]+" "+r.json()["access_token"]
+    userid = r.json()["id"]
 
-    # time.sleep(1)
+    time.sleep(1)
 
-    # #获取当前会员信息(Customer)
-    # apiurl = url+'api/Customer'
-    # headers = {'Content-Type': "application/json",'Authorization':session,"Origin":Origin}
-    # r = requests.get(url=apiurl, headers = headers)
-    # testprint('获取当前会员信息',r.status_code)
+    #获取当前会员信息(Customer)
+    apiurl = url+'api/Customer'
+    headers = {'Content-Type': "application/json",'Authorization':session,"Origin":Origin}
+    r = requests.get(url=apiurl, headers = headers)
+    testprint('获取当前会员信息',r.status_code)
 
-    # time.sleep(1)
+    time.sleep(1)
 
-    # #获取当前会员ID111(Customer)
-    # apiurl = url+'api/Customer/id'
-    # headers = {'Content-Type': "application/json",'Authorization':session,"Origin":Origin}
-    # payload = {"id": userid}
-    # r = requests.get(url=apiurl, headers = headers,params= json.dumps(payload))
-    # testprint('获取当前会员ID111',r.status_code,r.text)
-    # customerid = r.json()["id"]
+    #获取当前会员ID111(Customer)
+    apiurl = url+'api/Customer/id'
+    headers = {'Content-Type': "application/json",'Authorization':session,"Origin":Origin}
+    payload = {"id": userid}
+    r = requests.get(url=apiurl, headers = headers,params= json.dumps(payload))
+    testprint('获取当前会员ID111',r.status_code,r.text)
+    customerid = r.json()["id"]
 
     # time.sleep(1)
 

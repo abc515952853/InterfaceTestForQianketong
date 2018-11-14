@@ -28,7 +28,7 @@ class TestVerifyCode(unittest.TestCase):
         readconfig=ReadConfig.ReadConfig()
         excel = ReadExcl.Xlrd()
 
-        #填写求求参数h
+        #填写求求参数
         url = readconfig.get_url('url')+api
         payload = {"phone":str(data["phone"]),"codeType":int(data["type"]),"code":str(data["code"])}
         r = requests.get(url=url,params = payload)
@@ -38,8 +38,4 @@ class TestVerifyCode(unittest.TestCase):
         excel.set_cell(sheet_name,int(data["case_id"]),excel.get_sheet_colname(sheet_name)["result_msg"],r.text,excel.set_color(r.status_code))
         excel.save()
         
-        # #存储数据到本地config数据文件
-        # if r.status_code==200 or r.status_code ==204:
-        #     readconfig.set_member('phone',str(data['phone']))
-        #     readconfig.save()
         self.assertEqual(data['expected_code'],r.status_code,data["case_describe"])

@@ -54,6 +54,11 @@ class ReadConfig:
     #写入ini文件
     def save(self):
         self.cf.write(open(configPath, "w"))
+
+    #获取EMAIL信息
+    def get_email(self,name):
+        value = self.cf.get("EMAIL",name)
+        return value
            
 
 # if __name__ == "__main__":

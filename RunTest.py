@@ -3,8 +3,10 @@ from HTMLTestRunner import HTMLTestRunner
 import datetime
 import os
 import ReadConfig
+from common import Smtp
 
 readconfig = ReadConfig.ReadConfig()
+
 
 class Runtest:
     def __init__(self):
@@ -48,6 +50,10 @@ class Runtest:
                 runner.run(suit)     
         # runner = unittest.TextTestRunner(verbosity=2)
         # runner.run(suit)
+
+        # smtp = Smtp.Smtp()
+        # smtp.add_accessory(TextReport)
+        # smtp.send_email()
 
 if __name__ =='__main__':
     obj = Runtest()
