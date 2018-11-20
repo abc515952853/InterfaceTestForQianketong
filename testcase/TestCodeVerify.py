@@ -5,13 +5,13 @@ import ReadConfig
 import requests
 import  json 
 
-sheet_name = "VerifyCode"
+sheet_name = "CodeVerify"
 api='api/Verify/Code'
 
 excel = ReadExcl.Xlrd()
 
 @ddt.ddt
-class TestVerifyCode(unittest.TestCase): 
+class TestCodeVerify(unittest.TestCase): 
     def setUp(self):
         """
         :return:
@@ -24,7 +24,7 @@ class TestVerifyCode(unittest.TestCase):
         """
 
     @ddt.data(*excel.get_xls_next(sheet_name))
-    def test_VerifyCode(self, data):
+    def test_CodeVerify(self, data):
         readconfig=ReadConfig.ReadConfig()
         excel = ReadExcl.Xlrd()
 

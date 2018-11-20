@@ -67,7 +67,7 @@ def test():
     # testprint('获取当前会员ID222',r.status_code)
     # customerid = r.json()["id"]
 
-    # time.sleep(1)
+    time.sleep(1)
 
     #增加客户(Client)
     apiurl = url +'api/Client'
@@ -77,23 +77,23 @@ def test():
     testprint('增加客户',r.status_code,r.text)
     clientid = r.json()["id"]
 
-    time.sleep(1)
+    # time.sleep(1)
 
-    #更新客户等级(Client)
-    apiurl = url +'api/Client/{0}/Level'.format(clientid)
-    headers = {'Content-Type': "application/json",'Authorization':session,"Origin":Origin}
-    payload = {"Level":4}
-    r = requests.post(url=apiurl, headers = headers,data = json.dumps(payload))
-    testprint('更新客户等级',r.status_code,r.text)
+    # #更新客户等级(Client)
+    # apiurl = url +'api/Client/{0}/Level'.format(clientid)
+    # headers = {'Content-Type': "application/json",'Authorization':session,"Origin":Origin}
+    # payload = {"Level":4}
+    # r = requests.post(url=apiurl, headers = headers,data = json.dumps(payload))
+    # testprint('更新客户等级',r.status_code,r.text)
 
     # time.sleep(1)
 
-    # #更新客户备注(Client)
-    # apiurl = url +'api/Client/{0}/Remarks'.format(clientid)
-    # headers = {'Content-Type': "application/json",'Authorization':session,"Origin":Origin}
-    # payload = {"remarks":'哈哈哈哈'}
-    # r = requests.post(url=apiurl, headers = headers,data = json.dumps(payload))
-    # testprint('更新客户备注',r.status_code,r.text)
+    #更新客户备注(Client)
+    apiurl = url +'api/Client/{0}/Remarks'.format(clientid)
+    headers = {'Content-Type': "application/json",'Authorization':session,"Origin":Origin}
+    payload = {"remarks":'哈哈哈哈'}
+    r = requests.post(url=apiurl, headers = headers,data = json.dumps(payload))
+    testprint('更新客户备注',r.status_code,r.text)
     
 
     # time.sleep(1)

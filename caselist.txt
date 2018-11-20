@@ -1,8 +1,8 @@
-#TestSendCode
-#TestVerifyCode
+#TestCodeSend
+#TestCodeVerify
 #TestToken
 #TestUser
 #TestCustomer
 #TestBlog
-TestAddClient
-TestSetClient
+#TestClientAdd
+TestClientSet

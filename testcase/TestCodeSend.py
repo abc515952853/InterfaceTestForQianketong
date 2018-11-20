@@ -5,13 +5,13 @@ import ReadConfig
 import requests
 import  json 
 
-sheet_name = "SendCode"
+sheet_name = "CodeSend"
 api='api/SMS/Send/Code'
 
 excel = ReadExcl.Xlrd()
 
 @ddt.ddt
-class TestSendCode(unittest.TestCase): 
+class TestCodeSend(unittest.TestCase): 
     def setUp(self):
         """
         :return:
@@ -23,7 +23,7 @@ class TestSendCode(unittest.TestCase):
         """
 
     @ddt.data(*excel.get_xls_next(sheet_name))
-    def test_SendCode(self, data):
+    def test_CodeSend(self, data):
         excel = ReadExcl.Xlrd()
         readconfig=ReadConfig.ReadConfig()
         
