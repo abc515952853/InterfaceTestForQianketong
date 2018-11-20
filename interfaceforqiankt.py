@@ -39,23 +39,23 @@ def test():
     session = r.json()["token_type"]+" "+r.json()["access_token"]
     userid = r.json()["id"]
 
-    time.sleep(1)
+    # time.sleep(1)
 
-    #获取当前会员信息(Customer)
-    apiurl = url+'api/Customer'
-    headers = {'Content-Type': "application/json",'Authorization':session,"Origin":Origin}
-    r = requests.get(url=apiurl, headers = headers)
-    testprint('获取当前会员信息',r.status_code)
+    # #获取当前会员信息(Customer)
+    # apiurl = url+'api/Customer'
+    # headers = {'Content-Type': "application/json",'Authorization':session,"Origin":Origin}
+    # r = requests.get(url=apiurl, headers = headers)
+    # testprint('获取当前会员信息',r.status_code)
 
-    time.sleep(1)
+    # time.sleep(1)
 
-    #获取当前会员ID111(Customer)
-    apiurl = url+'api/Customer/id'
-    headers = {'Content-Type': "application/json",'Authorization':session,"Origin":Origin}
-    payload = {"id": userid}
-    r = requests.get(url=apiurl, headers = headers,params= json.dumps(payload))
-    testprint('获取当前会员ID111',r.status_code,r.text)
-    customerid = r.json()["id"]
+    # #获取当前会员ID111(Customer)
+    # apiurl = url+'api/Customer/id'
+    # headers = {'Content-Type': "application/json",'Authorization':session,"Origin":Origin}
+    # payload = {"id": userid}
+    # r = requests.get(url=apiurl, headers = headers,params= json.dumps(payload))
+    # testprint('获取当前会员ID111',r.status_code,r.text)
+    # customerid = r.json()["id"]
 
     # time.sleep(1)
 
@@ -69,22 +69,22 @@ def test():
 
     # time.sleep(1)
 
-    # #增加客户(Client)
-    # apiurl = url +'api/Client'
-    # headers = {'Content-Type': "application/json",'Authorization':session,"Origin":Origin}
-    # payload = {"display": "客户3号","phone": "18506826613","level": 3}
-    # r = requests.post(url=apiurl, headers = headers,data = json.dumps(payload))
-    # testprint('增加客户',r.status_code,r.text)
-    # clientid = r.json()["id"]
+    #增加客户(Client)
+    apiurl = url +'api/Client'
+    headers = {'Content-Type': "application/json",'Authorization':session,"Origin":Origin}
+    payload = {"display": "客户3号","phone": "18506826613","level":'' }
+    r = requests.post(url=apiurl, headers = headers,data = json.dumps(payload))
+    testprint('增加客户',r.status_code,r.text)
+    clientid = r.json()["id"]
 
-    # time.sleep(1)
+    time.sleep(1)
 
-    # #更新客户等级(Client)
-    # apiurl = url +'api/Client/{0}/Level'.format(clientid)
-    # headers = {'Content-Type': "application/json",'Authorization':session,"Origin":Origin}
-    # payload = {"Level":4}
-    # r = requests.post(url=apiurl, headers = headers,data = json.dumps(payload))
-    # testprint('更新客户等级',r.status_code,r.text)
+    #更新客户等级(Client)
+    apiurl = url +'api/Client/{0}/Level'.format(clientid)
+    headers = {'Content-Type': "application/json",'Authorization':session,"Origin":Origin}
+    payload = {"Level":4}
+    r = requests.post(url=apiurl, headers = headers,data = json.dumps(payload))
+    testprint('更新客户等级',r.status_code,r.text)
 
     # time.sleep(1)
 

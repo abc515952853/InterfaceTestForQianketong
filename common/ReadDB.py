@@ -1,5 +1,7 @@
 import pymssql
-import ReadConfig 
+import ReadConfig
+import uuid
+import time
 
 
 class Pymssql:
@@ -12,8 +14,44 @@ class Pymssql:
         self.conn = pymssql.connect(DBIp,DBUserName,DBPassWord,DBName)
         self.cursor = self.conn.cursor()
         
-    def GetSmsDate(self):
-        sql = "SELECT * FROM [dbo].[SmsRecord] order by createtime desc"
+    def GetCustomer(self,phone):
+        sql = "select a.id,a.nickname,c.ShortName,b.id,b.CompanyId  from [dbo].[User] a \
+        inner join [dbo].[Customer] b on a.id = b.userid \
+        inner join [dbo].[company] c on c.id = b.CompanyId where a.phone = {0} ".format(phone)
         self.cursor.execute(sql)
-        return self.cursor.fetchone()[0]
+        customer= self.cursor.fetchone()
+        customerinfo = {'userid':str(customer[0]),'nickname':customer[1],'companyshort':customer[2],'customerid':str(customer[3]),'companyid':str(customer[4])}
+        return customerinfo
+
+    def GetUser(self,phone):
+        sql = "select a.id,b.id,c.id,a.nickname  from [dbo].[User] a\
+        inner join [dbo].[Customer] b on a.id = b.userid \
+        inner join [dbo].[Blog] c on c.CustomerId = b.id where a.phone = {0} ".format(phone)
+        self.cursor.execute(sql)
+        User= self.cursor.fetchone()
+        userinfo = {'userid':str(User[0]),'customerid':str(User[1]),'blogid':str(User[2]),'nickname':str(User[3])}
+        return userinfo
+
+    def GetBlog(self,phone):
+        sql ="select c.id,a.phone,d.ShortName,a.nickname,c.Status  from [dbo].[User] a\
+        inner join [dbo].[Customer] b on a.id = b.userid \
+        inner join [dbo].[Blog] c on c.CustomerId = b.id \
+		inner join [dbo].[company] d on b.CompanyId = d.id  where a.phone = {0} ".format(phone)
+        self.cursor.execute(sql)
+        blog= self.cursor.fetchone()
+        bloginfo = {'blogid':str(blog[0]),'phone':blog[1],'companyName':blog[2],'nickname':blog[3],'status':blog[4]}
+        return bloginfo
+
+    def GetClientinfo(self,cleintid):
+        cleintid = "'"+cleintid+"'"
+        time.sleep(1)
+        sql = "select  display,phone,customerId,companyId,level from [dbo].[Client] where id={0}".format(cleintid)
+        self.cursor.execute(sql)
+        client= self.cursor.fetchone()
+        if client is not None:
+            clientinfo = {'display':client[0],'phone':client[1],'customerId':str(client[2]),'companyId':str(client[3]),'level':client[4]}
+        return clientinfo
+
+
+        
         

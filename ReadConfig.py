@@ -51,6 +51,16 @@ class ReadConfig:
         self.cf.set("MEMBER",name,value)
         self.save()
 
+    #获取CLIENT信息
+    def get_client(self,name):
+        value = self.cf.get("CLIENT",name)
+        return value
+
+    #重设CLIENT信息
+    def set_client(self,name,value):
+        self.cf.set("CLIENT",name,value)
+        self.save()
+
     #写入ini文件
     def save(self):
         self.cf.write(open(configPath, "w"))
