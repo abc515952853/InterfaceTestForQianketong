@@ -5,13 +5,13 @@ import ReadConfig
 import requests
 import  json 
 
-sheet_name = "ClientSet"
+sheet_name = "ClientLevel"
 api='api/Client/{0}/Level'
 
 excel = ReadExcl.Xlrd()
 
 @ddt.ddt
-class TestClientSet(unittest.TestCase): 
+class TestClientLevel(unittest.TestCase): 
     def setUp(self):
         """
         :return:
@@ -23,7 +23,7 @@ class TestClientSet(unittest.TestCase):
         """
 
     @ddt.data(*excel.get_xls_next(sheet_name))
-    def test_ClientSet(self, data):
+    def test_ClientLevel(self, data):
         excel = ReadExcl.Xlrd()
         readconfig=ReadConfig.ReadConfig()
         readdb = ReadDB.Pymssql()
