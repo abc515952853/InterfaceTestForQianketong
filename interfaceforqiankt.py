@@ -10,34 +10,36 @@ def test():
     companyid='FD6E54FE-0E31-4041-885B-C012BC7DD763'
     phone = '18506826613'
 
-    #发送验证码(SMS)
-    Codetype =1
-    apiurl=url+'api/SMS/Send/Code'
-    payload = {"Phone":phone,"CodeType":Codetype,"Domain":'sss'}
-    headers = {"Content-Type":"application/json"}
-    r = requests.post(url=apiurl,data = json.dumps(payload),headers = headers)
-    testprint('发送验证码',r.status_code,r.text)
+    session = 'bearer RPs65t2rTW1NDM0EjmZcLqL-0l9W8kkWOFhsxaDbyga5YqhYEIIf4Ty7fnSG5ZSib4gSBcgG7ocPQaAnO0Amak-78DRsoi0BKT1uEltjBhPGPAUUcLg4yTq37kJ6QxDisOr_N_F45vNdx8abrI9_YYv6wVPz9dSxtSAZ50QhN0aBGOwf3m358BXfD5bMCMv37Td9AFy40itY-Xd0d3kDMNkSo3TUpaiMjMem3d39BiqMU3r6kdJ0Cs9cyp_vQlK4NGFXLAeDuR3SevzpHVEKKxqcVZUbxFqOZQ13KuMLOoC1WheIFEKGmxe74Lo8iIvqe2Ilo-qYNsAcw43QjNRtrXnmwGTt9W5N4hyFZ8S785cFHtwX80ZcXmteYHYa9z8Ky43Qcg'
+
+    # #发送验证码(SMS)
+    # Codetype =1
+    # apiurl=url+'api/SMS/Send/Code'
+    # payload = {"Phone":phone,"CodeType":Codetype,"Domain":'sss'}
+    # headers = {"Content-Type":"application/json"}
+    # r = requests.post(url=apiurl,data = json.dumps(payload),headers = headers)
+    # testprint('发送验证码',r.status_code,r.text)
+
+    # # time.sleep(1)
+
+    # #验证验证码（Verify）
+    # code = '1234'
+    # apiurl = url+'api/Verify/Code'
+    # headers = {"Content-Type":"application/json"}
+    # payload = {"codeType":1, "phone": phone,"code":code}
+    # r = requests.get(url=apiurl, params = payload)
+    # testprint('验证验证码',r.status_code)
 
     # time.sleep(1)
 
-    #验证验证码（Verify）
-    code = '1234'
-    apiurl = url+'api/Verify/Code'
-    headers = {"Content-Type":"application/json"}
-    payload = {"codeType":1, "phone": phone,"code":code}
-    r = requests.get(url=apiurl, params = payload)
-    testprint('验证验证码',r.status_code)
-
-    time.sleep(1)
-
-    #登录
-    code = '1234'
-    apiurl = url+'api/Token'
-    payload = {"grant_type":'phonecode', "phone": phone,"code":code}
-    r = requests.post(url=apiurl, data = payload)
-    testprint('登录',r.status_code)
-    session = r.json()["token_type"]+" "+r.json()["access_token"]
-    userid = r.json()["id"]
+    # #登录
+    # code = '1234'
+    # apiurl = url+'api/Token'
+    # payload = {"grant_type":'phonecode', "phone": phone,"code":code}
+    # r = requests.post(url=apiurl, data = payload)
+    # testprint('登录',r.status_code)
+    # session = r.json()["token_type"]+" "+r.json()["access_token"]
+    # userid = r.json()["id"]
 
     # time.sleep(1)
 
@@ -67,7 +69,7 @@ def test():
     # testprint('获取当前会员ID222',r.status_code)
     # customerid = r.json()["id"]
 
-    time.sleep(1)
+    # time.sleep(1)
 
     #增加客户(Client)
     apiurl = url +'api/Client'
@@ -88,12 +90,12 @@ def test():
 
     # time.sleep(1)
 
-    #更新客户备注(Client)
-    apiurl = url +'api/Client/{0}/Remarks'.format(clientid)
-    headers = {'Content-Type': "application/json",'Authorization':session,"Origin":Origin}
-    payload = {"remarks":'哈哈哈哈'}
-    r = requests.post(url=apiurl, headers = headers,data = json.dumps(payload))
-    testprint('更新客户备注',r.status_code,r.text)
+    # #更新客户备注(Client)
+    # apiurl = url +'api/Client/{0}/Remarks'.format(clientid)
+    # headers = {'Content-Type': "application/json",'Authorization':session,"Origin":Origin}
+    # payload = {"remarks":'哈哈哈哈'}
+    # r = requests.post(url=apiurl, headers = headers,data = json.dumps(payload))
+    # testprint('更新客户备注',r.status_code,r.text)
     
 
     # time.sleep(1)
@@ -123,12 +125,12 @@ def test():
 
     # time.sleep(1)
 
-    # #客户维护(Client)
-    # apiurl = url+'api/Client/Maintain'
-    # headers = {'Content-Type': "application/json",'Authorization':session,"Origin":Origin}
-    # payload = [{"id":clientid,"display":"qqq"}]
-    # r = requests.post(url=apiurl, headers = headers,data = json.dumps(payload) )
-    # testprint('客户维护',r.status_code,r.text)
+    #客户维护(Client)
+    apiurl = url+'api/Client/Maintain'
+    headers = {'Content-Type': "application/json",'Authorization':session,"Origin":Origin}
+    payload = [{"id":clientid,"display":"qqq"}]
+    r = requests.post(url=apiurl, headers = headers,data = json.dumps(payload) )
+    testprint('客户维护',r.status_code,r.text)
 
     # time.sleep(1)
 

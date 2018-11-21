@@ -38,6 +38,6 @@ class Customer(unittest.TestCase):
             readconfig.set_member('customerid',customerinfo['customerid'])
             readconfig.set_member('companyid',customerinfo['companyid'])
         else:
-            self.assertEqual(200,r.status_code,case_describe)                    
+            self.assertEqual(r.status_code,200,case_describe)                    
 
         

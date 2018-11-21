@@ -38,4 +38,4 @@ class TestCodeVerify(unittest.TestCase):
         excel.set_cell(sheet_name,int(data["case_id"]),excel.get_sheet_colname(sheet_name)["result_msg"],r.text,excel.set_color(r.status_code))
         excel.save()
         
-        self.assertEqual(data['expected_code'],r.status_code,data["case_describe"])
+        self.assertEqual(r.status_code,data['expected_code'],data["case_describe"])

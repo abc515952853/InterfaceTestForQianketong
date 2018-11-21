@@ -29,7 +29,7 @@ class TestClientLevel(unittest.TestCase):
         readdb = ReadDB.Pymssql()
         
         #填写求求参数
-        url = readconfig.get_url('url')+api.format(readconfig.get_client('clientid'))
+        url = readconfig.get_url('url')+api.format(readconfig.get_client('clientid1'))
         session =  readconfig.get_member('session')
         origin = readconfig.get_url('origin')
         headers = {'Content-Type': "application/json",'Authorization':session,"Origin":origin}
@@ -42,7 +42,7 @@ class TestClientLevel(unittest.TestCase):
         excel.save()
         
         if r.status_code==200 or r.status_code==204: 
-            clientinfo = readdb.GetClientinfo(readconfig.get_client('clientid'))
+            clientinfo = readdb.GetClientinfo(readconfig.get_client('clientid1'))
             self.assertEqual(clientinfo['level'],data['level'],data["case_describe"])
-        self.assertEqual(data['expected_code'],r.status_code,data["case_describe"])
+        self.assertEqual(r.status_code,data['expected_code'],data["case_describe"])
 

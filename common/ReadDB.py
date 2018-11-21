@@ -13,7 +13,8 @@ class Pymssql:
         DBName= readconfig.get_db('dbname')
         self.conn = pymssql.connect(DBIp,DBUserName,DBPassWord,DBName)
         self.cursor = self.conn.cursor()
-        
+
+########################################获取测试结果########################################
     def GetCustomer(self,phone):
         sql = "select a.id,a.nickname,c.ShortName,b.id,b.CompanyId  from [dbo].[User] a \
         inner join [dbo].[Customer] b on a.id = b.userid \
@@ -45,12 +46,45 @@ class Pymssql:
     def GetClientinfo(self,cleintid):
         cleintid = "'"+cleintid+"'"
         time.sleep(1)
-        sql = "select  display,phone,customerId,companyId,level from [dbo].[Client] where id={0}".format(cleintid)
+        sql = "select  display,phone,customerId,companyId,level,remarks,status from [dbo].[Client] where id={0}".format(cleintid)
         self.cursor.execute(sql)
         client= self.cursor.fetchone()
         if client is not None:
-            clientinfo = {'display':client[0],'phone':client[1],'customerId':str(client[2]),'companyId':str(client[3]),'level':client[4]}
+            clientinfo = {'display':client[0],'phone':client[1],'customerId':str(client[2]),'companyId':str(client[3]),'level':client[4],'remarks':client[5],'status':client[6]}
         return clientinfo
+
+    def GetClientAllinfo(self,customerid):
+        customerid = "'"+customerid+"'"
+        sql = "select * from [dbo].[Client] where customerid={0}".format(customerid)
+        self.cursor.execute(sql)
+        clientallinfo= self.cursor.fetchall()
+        clientallid = []
+        for i in range(len(clientallinfo)):
+            clientallid.append(str(clientallinfo[i][0]))
+        return clientallid
+
+    def GetClientMaintainNumber(self,customerid):
+        customerid = "'"+customerid+"'"
+        sql = "SELECT count(*) FROM [dbo].[Client] where [status]=1 and customerid={0}".format(customerid)
+        self.cursor.execute(sql)
+        maintainfo= self.cursor.fetchone()
+        maintainnumber = maintainfo[0]
+        return maintainnumber
+
+
+
+########################################布置测试环境########################################
+
+    def SetCustomerMoney(self,money,userid):
+        userid = "'"+userid+"'"
+        sql = "update [dbo].[User] set MoneyIn={0},MoneyOut=0 where id={1}".format(money,userid)
+        print(sql)
+        self.cursor.execute(sql)
+        self.conn.commit()
+        
+
+
+
 
 
         

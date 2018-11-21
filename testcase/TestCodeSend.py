@@ -41,4 +41,4 @@ class TestCodeSend(unittest.TestCase):
         if r.status_code==200 or r.status_code ==204:
             readconfig.set_member('phone',str(data['phone']))
             readconfig.save()
-        self.assertEqual(data['expected_code'],r.status_code,data["case_describe"])
+        self.assertEqual(r.status_code,data['expected_code'],data["case_describe"])

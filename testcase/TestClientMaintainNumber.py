@@ -5,10 +5,10 @@ import ReadConfig
 import requests
 import  json 
 
-api='api/User'
-case_describe = '获取用户信息'
+api='api/Client/Maintain/Number'
+case_describe = '获取客户维护数量信息'
 
-class User(unittest.TestCase): 
+class ClientMaintainNumber(unittest.TestCase): 
     def setUp(self):
         """
         :return:
@@ -19,7 +19,7 @@ class User(unittest.TestCase):
         :return:
         """
 
-    def test_User(self):
+    def test_ClientMaintainNumber(self):
         readconfig=ReadConfig.ReadConfig()
         readdb = ReadDB.Pymssql()
 
@@ -28,14 +28,9 @@ class User(unittest.TestCase):
         origin = readconfig.get_url('origin')
         headers = {'Content-Type': "application/json",'Authorization':session,"Origin":origin}
         r = requests.get(url=url, headers = headers)
-        if r.status_code==200:
-            self.assertIn('id', r.json()) 
-            userinfo = readdb.GetUser(readconfig.get_member('phone'))
-            self.assertEqual(r.json()['id'],userinfo['userid'],case_describe) 
-            self.assertEqual(r.json()['nickname'],userinfo['nickname'],case_describe) 
-            self.assertEqual(r.json()['blogId'],userinfo['blogid'],case_describe)
-            self.assertEqual(r.json()['customerId'],userinfo['customerid'],case_describe)
-            readconfig.set_member('userid',userinfo['userid'])
+        if r.status_code==200 or r.status_code == 204:
+            maintainnumber = readdb.GetClientMaintainNumber(readconfig.get_member('customerid'))
+            self.assertEqual(r.json()['maintainNumber'],maintainnumber,case_describe)            
         else:
             self.assertEqual(r.status_code,200,case_describe)                   
 
