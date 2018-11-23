@@ -42,7 +42,7 @@ class Xlrd:
     def conversion_cell(self,sheet,curRowNo,curColNo,cell):
         #判断python读取的返回类型  0 --empty,1 --string, 2 --number(都是浮点), 3 --date, 4 --boolean, 5 --error  
         if sheet.cell(curRowNo,curColNo).ctype == 2:
-             no =  int(cell)
+             no = int(cell)
         else:
              no = cell
         return no

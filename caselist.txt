@@ -4,7 +4,7 @@
 #TestUser
 #TestCustomer
 #TestBlog
-#TestClientAdd
+TestClientAdd
 #TestClientLevel
 #TestClientRemarks
 #TestClientAll

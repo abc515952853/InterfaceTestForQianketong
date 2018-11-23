@@ -65,12 +65,27 @@ class Pymssql:
 
     def GetClientMaintainNumber(self,customerid):
         customerid = "'"+customerid+"'"
-        sql = "SELECT count(*) FROM [dbo].[Client] where [status]=1 and customerid={0}".format(customerid)
+        sql = "select count(*) from [dbo].[Client] where [status]=1 and customerid={0}".format(customerid)
         self.cursor.execute(sql)
         maintainfo= self.cursor.fetchone()
         maintainnumber = maintainfo[0]
         return maintainnumber
 
+    def GetUserMoney(self,userid):
+        userid = "'"+userid+"'"
+        sql = "select moneyout from [dbo].[User] where id={0}".format(userid)
+        time.sleep(1)
+        self.cursor.execute(sql)
+        usermoneyinfo= self.cursor.fetchone()
+        return usermoneyinfo[0]
+
+    def GetClientMaintainOrder(self,orderid):
+        orderid = "'"+orderid+"'"
+        sql = "select TotalPrice from [dbo].[ClientMaintainOrder] where id={0}".format(orderid)
+        time.sleep(1)
+        self.cursor.execute(sql)
+        ordertotalprice= self.cursor.fetchone()
+        return ordertotalprice[0]
 
 
 ########################################布置测试环境########################################
@@ -78,7 +93,6 @@ class Pymssql:
     def SetCustomerMoney(self,money,userid):
         userid = "'"+userid+"'"
         sql = "update [dbo].[User] set MoneyIn={0},MoneyOut=0 where id={1}".format(money,userid)
-        print(sql)
         self.cursor.execute(sql)
         self.conn.commit()
         

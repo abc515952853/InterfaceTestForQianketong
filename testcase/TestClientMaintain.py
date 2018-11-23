@@ -13,9 +13,9 @@ excel = ReadExcl.Xlrd()
 @ddt.ddt
 class TestClientMaintain(unittest.TestCase): 
     def setUp(self):
-        self.readdb = ReadDB.Pymssql()
-        self.excel = ReadExcl.Xlrd()
-        self.readconfig=ReadConfig.ReadConfig()
+        """
+        :return:
+        """
 
     def tearDown(self):
         """
@@ -24,23 +24,29 @@ class TestClientMaintain(unittest.TestCase):
 
     @ddt.data(*excel.get_xls_next(sheet_name))
     def test_ClientMaintain(self, data):
+        readdb = ReadDB.Pymssql()
+        excel = ReadExcl.Xlrd()
+        readconfig=ReadConfig.ReadConfig()
         #填写求求参数
-        print(str(data["money"]))
-        url = self.readconfig.get_url('url')+api
-        session =  self.readconfig.get_member('session')
-        origin = self.readconfig.get_url('origin')
+        url = readconfig.get_url('url')+api
+        session =  readconfig.get_member('session')
+        origin = readconfig.get_url('origin')
         headers = {'Content-Type': "application/json",'Authorization':session,"Origin":origin}
-        self.readdb.SetCustomerMoney(str(data["money"]),self.readconfig.get_member('userid'))
-        # payload = {"display": str(data["display"]),"phone": str(data["phone"]),"level": str(data["level"])}
-        # r = requests.post(url=url, headers = headers,data = json.dumps(payload))
+        readdb.SetCustomerMoney(str(data["money"]),readconfig.get_member('userid'))
+        if data['isone']:
+            payload = [{"id":readconfig.get_client('clientid2'),"display":"qqq"}]
+        else:
+            payload = [{"id":readconfig.get_client('clientid3'),"display":"qqq"},{"id":readconfig.get_client('clientid4'),"display":"qqq"}]
+        r = requests.post(url=url, headers = headers,data = json.dumps(payload))
 
-        # #处理请求数据到excl用例文件
-        # self.excel.set_cell(sheet_name,int(data["case_id"]),self.excel.get_sheet_colname(sheet_name)["result_code"],r.status_code,self.excel.set_color(r.status_code))
-        # self.excel.set_cell(sheet_name,int(data["case_id"]),self.excel.get_sheet_colname(sheet_name)["result_msg"],r.text,self.excel.set_color())
-        # self.excel.save()
+        #处理请求数据到excl用例文件
+        excel.set_cell(sheet_name,int(data["case_id"]),excel.get_sheet_colname(sheet_name)["result_code"],r.status_code,excel.set_color(r.status_code))
+        excel.set_cell(sheet_name,int(data["case_id"]),excel.get_sheet_colname(sheet_name)["result_msg"],r.text,excel.set_color())
+        excel.save()
         
-        # if r.status_code==200 or r.status_code==204:
-        #     print('111')
- 
-        # self.assertEqual(r.status_code,data['expected_code'],data["case_describe"])
+        if r.status_code==200 or r.status_code==204:
+            orderprice = readdb.GetClientMaintainOrder(r.json()['orderId'])
+            usermoney = readdb.GetUserMoney(readconfig.get_member('userid'))
+            self.assertEqual(orderprice,usermoney,data["case_describe"])
+        self.assertEqual(r.status_code,data['expected_code'],data["case_describe"])
 

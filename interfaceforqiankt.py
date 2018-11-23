@@ -125,12 +125,12 @@ def test():
 
     # time.sleep(1)
 
-    #客户维护(Client)
-    apiurl = url+'api/Client/Maintain'
-    headers = {'Content-Type': "application/json",'Authorization':session,"Origin":Origin}
-    payload = [{"id":clientid,"display":"qqq"}]
-    r = requests.post(url=apiurl, headers = headers,data = json.dumps(payload) )
-    testprint('客户维护',r.status_code,r.text)
+    # #客户维护(Client)
+    # apiurl = url+'api/Client/Maintain'
+    # headers = {'Content-Type': "application/json",'Authorization':session,"Origin":Origin}
+    # payload = [{"id":clientid,"display":"qqq"}]
+    # r = requests.post(url=apiurl, headers = headers,data = json.dumps(payload) )
+    # testprint('客户维护',r.status_code,r.text)
 
     # time.sleep(1)
 
@@ -147,13 +147,13 @@ def test():
 
     # time.sleep(1)
 
-    # #增加事件(Event)
-    # apiurl = url+'api/Event/Add'
-    # headers = {'Content-Type': "application/json",'Authorization':session,"Origin":Origin}
-    # payload = {"Clients":[clientid],"title":'增加了一个很大的事件',"TriggerTime":"2019-07-26 19:21:34.723","Cycle":1}
-    # r = requests.post(url = apiurl, headers = headers,data = json.dumps(payload))
-    # testprint('增加事件',r.status_code,r.text)
-    # EventId = r.json()[0]["id"]
+    #增加事件(Event)
+    apiurl = url+'api/Event/Add'
+    headers = {'Content-Type': "application/json",'Authorization':session,"Origin":Origin}
+    payload = {"Clients":[clientid],"title":'增加了一个很大的事件',"TriggerTime":"2019-07-26 19:21:34.723","Cycle":1}
+    r = requests.post(url = apiurl, headers = headers,data = json.dumps(payload))
+    testprint('增加事件',r.status_code,r.text)
+    EventId = r.json()[0]["id"]
 
     # time.sleep(1)
     
